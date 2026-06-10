@@ -1,17 +1,22 @@
 pipeline {
     agent any
  
-    environment {
-        CONTAINER_NAME = 'worldcup-backend-jenkins'
-        IMAGE_NAME = 'worldcup-backend'
-        NETWORK_NAME = 'worldcup_default'
-        DB_CONTAINER = 'worldcup-mysql'
-        PORT_MAPPING = '5085:8080'
-        DB_CONNECTION = "Server=worldcup-mysql;Port=3306;Database=WorldCupDb;User=root;Password=root;"
-        JWT_SECRET = 'super_secret_key_world_cup_polling_system_2026_very_long_for_hmac_sha256'
-        JWT_ISSUER = 'WorldCupApp'
-        JWT_AUDIENCE = 'WorldCupUsers'
-    }
+  environment {
+    CONTAINER_NAME = 'worldcup-backend-jenkins'
+    IMAGE_NAME = 'worldcup-backend'
+
+    NETWORK_NAME = 'app-net'
+
+    DB_CONTAINER = 'app-mysql'
+
+    PORT_MAPPING = '5085:8080'
+
+    DB_CONNECTION = "Server=app-mysql;Port=3306;Database=footballpollingdb;User=root;Password=root;"
+
+    JWT_SECRET = 'super_secret_key_world_cup_polling_system_2026_very_long_for_hmac_sha256'
+    JWT_ISSUER = 'WorldCupApp'
+    JWT_AUDIENCE = 'WorldCupUsers'
+}
  
     stages {
         stage('Checkout') {
